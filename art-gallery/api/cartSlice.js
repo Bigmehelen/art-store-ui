@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
 
 const initialState = {
   items: [],
@@ -48,4 +49,18 @@ const cartSlice = createSlice({
 });
 
 export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
+
+export const useCart = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart);
+
+  return {
+    ...cart,
+    addToCart: (artwork) => dispatch(addToCart(artwork)),
+    removeFromCart: (artworkId) => dispatch(removeFromCart(artworkId)),
+    updateQuantity: (id, quantity) => dispatch(updateQuantity({ id, quantity })),
+    clearCart: () => dispatch(clearCart())
+  };
+};
+
 export default cartSlice.reducer;

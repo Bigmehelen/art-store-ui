@@ -14,12 +14,6 @@ export const artworksApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAllArtworks: builder.query({
-      query: () => "/api/artworks",
-    }),
-    getArtworkById: builder.query({
-      query: (id) => `/api/artworks/${id}`,
-    }),
     placeOrder: builder.mutation({
       query: (orderData) => ({
         url: "/api/orders",
@@ -33,4 +27,13 @@ export const artworksApi = createApi({
   }),
 });
 
-export const { useGetAllArtworksQuery, useGetArtworkByIdQuery, usePlaceOrderMutation } = artworksApi;
+export const { usePlaceOrderMutation } = artworksApi;
+
+export const usePlaceOrder = () => {
+  const [placeOrderMutation, { isLoading }] = usePlaceOrderMutation();
+
+  return {
+    placeOrder: placeOrderMutation,
+    loading: isLoading
+  };
+};

@@ -5,6 +5,7 @@ import cartReducer from '../api/cartSlice.js';
 import artworksReducer from '../api/artworksSlice.js';
 import { authApi } from "../api/authAPI.js";
 import { artworksApi } from '../api/artworksAPI.js';
+import { publicArtworksApi } from '../api/publicArtworksAPI.js';
 
 export const store = configureStore({
   reducer: {
@@ -13,9 +14,10 @@ export const store = configureStore({
     artworks: artworksReducer,
     [authApi.reducerPath]: authApi.reducer,
     [artworksApi.reducerPath]: artworksApi.reducer,
+    [publicArtworksApi.reducerPath]: publicArtworksApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, artworksApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, artworksApi.middleware, publicArtworksApi.middleware),
 });
 
 setupListeners(store.dispatch);

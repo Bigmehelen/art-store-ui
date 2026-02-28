@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import './App.css'
-import Gallery from '../pages/Gallery'
-import Register from '../auth/register'
-import Login from '../auth/login'
-import Navbar from '../component/Navbar'
+import Gallery from './pages/Gallery'
+import Register from './auth/register'
+import Login from './auth/login'
+import Navbar from './component/Navbar'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('gallery')
