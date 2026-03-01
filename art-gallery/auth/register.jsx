@@ -76,9 +76,9 @@ const Register = ({ onNavigateToGallery }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-5 bg-linear-to-br from-[#667eea] to-[#764ba2]">
-      <div className="bg-white rounded-2xl p-5 py-[30px] md:p-10 w-full max-w-[450px] shadow-2xl">
+      <div className="bg-white rounded-2xl p-5 py-7.5 md:p-10 w-full max-w-112.5 shadow-2xl">
         <h1 className="m-0 mb-2.5 text-[#2c3e50] text-[1.5rem] md:text-[2rem] text-center font-bold">Create Your Account</h1>
-        <p className="text-center text-[#7f8c8d] m-0 mb-[30px] text-[1.05rem]">Join us to order beautiful artwork</p>
+        <p className="text-center text-[#7f8c8d] m-0 mb-7.5 text-[1.05rem]">Join us to order beautiful artwork</p>
 
         {error && <div className="bg-[#fee] text-[#c33] p-3 rounded-lg mb-5 border-l-4 border-[#c33]">{error}</div>}
         {success && <div className="bg-[#efe] text-[#3c3] p-3 rounded-lg mb-5 border-l-4 border-[#3c3]">{success}</div>}
@@ -142,7 +142,7 @@ const Register = ({ onNavigateToGallery }) => {
 
           <button
             type="submit"
-            className="p-3.5 bg-linear-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg text-[1.05rem] font-semibold cursor-pointer transition-all duration-300 hover:enabled:translate-y-[-2px] hover:enabled:shadow-[0_4px_15px_rgba(102,126,234,0.4)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed"
+            className="p-3.5 bg-linear-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg text-[1.05rem] font-semibold cursor-pointer transition-all duration-300 hover:enabled:translate-y-0.5 hover:enabled:shadow-[0_4px_15px_rgba(102,126,234,0.4)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed"
             disabled={isLoading}
           >
             {isLoading ? 'Creating Account...' : 'Register'}

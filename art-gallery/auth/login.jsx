@@ -7,7 +7,7 @@ const Login = ({ onNavigateToGallery, onNavigateToRegister }) => {
   const [loginMutation, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
   const [localError, setLocalError] = useState('');
@@ -23,12 +23,12 @@ const Login = ({ onNavigateToGallery, onNavigateToRegister }) => {
   };
 
   const validateForm = () => {
-    if (!formData.email.trim()) {
-      setLocalError('Email is required');
+    if (!formData.username.trim()) {
+      setLocalError('Username is required');
       return false;
     }
-    if (!formData.email) {
-      setLocalError('Please enter a valid email');
+    if (!formData.username) {
+      setLocalError('Please enter a valid username');
       return false;
     }
     if (formData.password.length < 6) {
@@ -47,13 +47,13 @@ const Login = ({ onNavigateToGallery, onNavigateToRegister }) => {
 
     try {
       const result = await loginMutation({
-        email: formData.email,
+        username: formData.username,
         password: formData.password,
       }).unwrap();
 
       dispatch(setUser(result));
       setSuccess('Login successful! Redirecting to gallery...');
-      setFormData({ email: '', password: '' });
+      setFormData({ username: '', password: '' });
 
       setTimeout(() => {
         onNavigateToGallery();
@@ -65,23 +65,23 @@ const Login = ({ onNavigateToGallery, onNavigateToRegister }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-5 bg-linear-to-br from-[#667eea] to-[#764ba2]">
-      <div className="bg-white rounded-2xl p-5 py-[30px] md:p-10 w-full max-w-[450px] shadow-2xl">
+      <div className="bg-white rounded-2xl p-5 py-7.5 md:p-10 w-full max-w-112.5 shadow-2xl">
         <h1 className="m-0 mb-2.5 text-[#2c3e50] text-[1.5rem] md:text-[2rem] text-center font-bold">Welcome Back</h1>
-        <p className="text-center text-[#7f8c8d] m-0 mb-[30px] text-[1.05rem]">Login to continue shopping</p>
+        <p className="text-center text-[#7f8c8d] m-0 mb-7.5 text-[1.05rem]">Login to continue shopping</p>
 
         {localError && <div className="bg-[#fee] text-[#c33] p-3 rounded-lg mb-5 border-l-4 border-[#c33]">{localError}</div>}
         {success && <div className="bg-[#efe] text-[#3c3] p-3 rounded-lg mb-5 border-l-4 border-[#3c3]">{success}</div>}
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4 md:gap-5 mb-5">
           <div className="flex flex-col">
-            <label htmlFor="email" className="mb-2 text-[#2c3e50] font-semibold text-[0.95rem]">Email</label>
+            <label htmlFor="username" className="mb-2 text-[#2c3e50] font-semibold text-[0.95rem]">Username</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              type="username"
+              id="username"
+              name="username"
+              value={formData.username}
               onChange={handleInputChange}
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               disabled={isLoading}
               className="p-3 border-2 border-[#ecf0f1] rounded-lg text-base transition-all duration-300 focus:outline-none focus:border-[#667eea] focus:shadow-[0_0_0_3px_rgba(102,126,234,0.1)] disabled:bg-[#f8f9fa] disabled:cursor-not-allowed disabled:opacity-60"
             />
@@ -103,7 +103,7 @@ const Login = ({ onNavigateToGallery, onNavigateToRegister }) => {
 
           <button
             type="submit"
-            className="p-3.5 bg-linear-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg text-[1.05rem] font-semibold cursor-pointer transition-all duration-300 hover:enabled:translate-y-[-2px] hover:enabled:shadow-[0_4px_15px_rgba(102,126,234,0.4)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed"
+            className="p-3.5 bg-linear-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg text-[1.05rem] font-semibold cursor-pointer transition-all duration-300 hover:enabled:translate-y-0.5 hover:enabled:shadow-[0_4px_15px_rgba(102,126,234,0.4)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed"
             disabled={isLoading}
           >
             {isLoading ? 'Logging in...' : 'Login'}

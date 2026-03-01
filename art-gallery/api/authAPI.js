@@ -6,7 +6,7 @@ import { setUser, clearAuth, setError, clearError } from './authSlice';
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:2000/api/v1/auth",
+    baseUrl: "http://localhost:8080/api/user/auth",
     prepareHeaders: async (headers) => {
       const token = await AsyncStorage.getItem('token');
       if (token) {
@@ -18,7 +18,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (userData) => ({
-        url: "/enter-signup",
+        url: "/register",
         method: "POST",
         body: userData,
         headers: {
@@ -28,7 +28,7 @@ export const authApi = createApi({
     }),
     login: builder.mutation({
       query: (credentials) => ({
-        url: "/find-login",
+        url: "/login",
         method: "POST",
         body: credentials,
         headers: {
@@ -36,19 +36,28 @@ export const authApi = createApi({
         },
       }),
     }),
+    becomeArtist: builder.mutation({
+      query: () => ({
+        url: "/become-artist",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      }),
+    }),
     logout: builder.mutation({
       query: () => ({
-        url: "/api/auth/logout",
+        url: "/logout",
         method: "POST",
       }),
     }),
     getUser: builder.query({
-      query: () => "/api/auth/me",
+      query: () => "/me",
     }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation, useGetUserQuery } = authApi;
+export const { useRegisterMutation, useLoginMutation, useBecomeArtistMutation, useLogoutMutation, useGetUserQuery } = authApi;
 
 export const useAuth = () => {
   const dispatch = useDispatch();

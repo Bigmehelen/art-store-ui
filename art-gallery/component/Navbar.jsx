@@ -10,8 +10,8 @@ const Navbar = ({ onNavigate }) => {
   };
 
   return (
-    <nav className="bg-linear-to-br from-[#2c3e50] to-[#3d4e60] text-white p-0 shadow-lg sticky top-0 z-[100]">
-      <div className="max-w-[1400px] mx-auto px-5 py-[15px] flex flex-col md:flex-row justify-between items-center gap-[15px] md:gap-0">
+    <nav className="bg-linear-to-br from-[#2c3e50] to-[#3d4e60] text-white p-0 shadow-lg sticky top-0 z-100">
+      <div className="max-w-350 mx-auto px-5 py-3.75 flex flex-col md:flex-row justify-between items-center gap-3.75 md:gap-0">
         <div className="navbar-brand">
           <h1
             onClick={() => onNavigate('gallery')}
@@ -21,7 +21,7 @@ const Navbar = ({ onNavigate }) => {
           </h1>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-[15px] md:gap-[30px] items-center w-full md:w-auto">
+        <div className="flex flex-col md:flex-row gap-3.75 md:gap-3.75 items-center w-full md:w-auto">
           <button
             className="bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea]"
             onClick={() => onNavigate('gallery')}
@@ -29,7 +29,7 @@ const Navbar = ({ onNavigate }) => {
             Gallery
           </button>
 
-          <div className="flex flex-wrap gap-[15px] items-center w-full md:w-auto justify-center md:justify-start">
+          <div className="flex flex-wrap gap-3.75 items-center w-full md:w-auto justify-center md:justify-start">
             {isAuthenticated ? (
               <>
                 <span className="text-[0.95rem] text-[#ecf0f1] block text-center w-full md:w-auto">Welcome, {user?.username}!</span>
@@ -43,13 +43,13 @@ const Navbar = ({ onNavigate }) => {
             ) : (
               <>
                 <button
-                  className="px-4 py-2 rounded-md border-none bg-linear-to-br from-[#667eea] to-[#764ba2] text-white text-[0.95rem] font-semibold cursor-pointer transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_4px_12px_rgba(102,126,234,0.4)]"
+                  className="px-4 py-2 rounded-md border-none bg-linear-to-br from-[#667eea] to-[#764ba2] text-white text-[0.95rem] font-semibold cursor-pointer transition-all duration-300 hover:translate-y-0.5 hover:shadow-[0_4px_12px_rgba(102,126,234,0.4)]"
                   onClick={() => onNavigate('login')}
                 >
                   Login
                 </button>
                 <button
-                  className="px-4 py-2 rounded-md border-none bg-linear-to-br from-[#667eea] to-[#764ba2] text-white text-[0.95rem] font-semibold cursor-pointer transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_4px_12px_rgba(102,126,234,0.4)]"
+                  className="px-4 py-2 rounded-md border-none bg-linear-to-br from-[#667eea] to-[#764ba2] text-white text-[0.95rem] font-semibold cursor-pointer transition-all duration-300 hover:translate-y-0.5 hover:shadow-[0_4px_12px_rgba(102,126,234,0.4)]"
                   onClick={() => onNavigate('register')}
                 >
                   Sign Up
