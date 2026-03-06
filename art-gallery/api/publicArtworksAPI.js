@@ -3,17 +3,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const publicArtworksApi = createApi({
     reducerPath: "publicArtworksApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080",
+        baseUrl: "https://helenartstore.onrender.com/api/v1/artworks",
     }),
     endpoints: (builder) => ({
         getAllArtworks: builder.query({
-            query: () => "/api/v1/artworks/all",
+            query: () => "/all",
         }),
         getArtworkById: builder.query({
-            query: (id) => `/api/v1/artworks/${id}`,
+            query: (id) => `/${id}`,
         }),
         searchArtworksByName: builder.query({
-            query: (name) => `/api/v1/artworks/search?name=${encodeURIComponent(name)}`,
+            query: (name) => `/search?name=${encodeURIComponent(name)}`,
         }),
     }),
 });

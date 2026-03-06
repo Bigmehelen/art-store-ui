@@ -6,7 +6,7 @@ import { setUser, clearAuth, setError, clearError } from './authSlice';
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api/user/auth",
+    baseUrl: "https://helenartstore.onrender.com/api/user/auth",
     prepareHeaders: async (headers) => {
       const token = await AsyncStorage.getItem('token');
       if (token) {

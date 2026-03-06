@@ -126,13 +126,13 @@ const Gallery = ({ onNavigateToRegister }) => {
               {filteredArtworks.map(artwork => (
                 <div key={artwork.id} className="w-full md:w-[30%] bg-white rounded-[14px] mb-6 overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.08)]">
                   <img
-                    src={artwork.imagesUrls}
+                    src={artwork.imagesUrls?.[0]} 
                     className="w-full h-45 md:h-55 bg-[#e5e7eb] object-cover"
                     alt={artwork.description}
                   />
                   <div className="p-4">
                     <h3 className="text-[18px] font-semibold mb-1">{artwork.name}</h3>
-                    <p className="text-[14px] text-[#6b7280] mb-2">Painted by {artwork.artist}</p>
+                    <p className="text-[14px] text-[#6b7280] mb-2"> Painted by {artwork.artist}</p>
                     <p className="text-[14px] text-[#374151] mb-3">{artwork.description}</p>
                     <p className="text-[16px] font-bold mb-3">N{artwork.price.toLocaleString()}</p>
 

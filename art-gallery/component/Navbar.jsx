@@ -1,12 +1,14 @@
 import React from 'react';
 import { useAuth } from '../api/authAPI';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Navbar = ({ onNavigate }) => {
   const { user, isAuthenticated, logout } = useAuth();
 
-  const handleLogout = async () => {
-    await logout();
-    onNavigate('gallery');
+  const handleLogout = () => {
+    logout();
+    AsyncStorage.removeItem('user');
+    AsyncStorage.removeItem('token');
   };
 
   return (
