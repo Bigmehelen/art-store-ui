@@ -8,6 +8,7 @@ export const publicArtworksApi = createApi({
     endpoints: (builder) => ({
         getAllArtworks: builder.query({
             query: () => "/all",
+            method: "POST",
         }),
         getArtworkById: builder.query({
             query: (id) => `/${id}`,
