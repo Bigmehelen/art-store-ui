@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+console.log('API URL:', import.meta.env.VITE_API_URL);
 export const publicArtworksApi = createApi({
     reducerPath: "publicArtworksApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://helenartstore.onrender.com/api/v1/artworks",
+        baseUrl: `${import.meta.env.VITE_API_URL}/api/v1/artworks`,
     }),
     endpoints: (builder) => ({
         getAllArtworks: builder.query({
             query: () => "/all",
-            method: "GET",
         }),
         getArtworkById: builder.query({
             query: (id) => `/${id}`,

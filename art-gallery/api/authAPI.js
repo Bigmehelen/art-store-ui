@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { setUser, clearAuth, setError, clearError } from './authSlice';
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://helenartstore.onrender.com/api/user/auth",
+    baseUrl: `${import.meta.env.VITE_API_URL}/api/user/auth`,
     prepareHeaders: async (headers) => {
       const token = await AsyncStorage.getItem('token');
       if (token) {

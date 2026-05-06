@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const artworksApi = createApi({
   reducerPath: "artworksApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://helenartstore.onrender.com",
+    baseUrl: `${import.meta.env.VITE_API_URL}`,
     prepareHeaders: async (headers) => {
       const token = await AsyncStorage.getItem('token');
       if (token) {
