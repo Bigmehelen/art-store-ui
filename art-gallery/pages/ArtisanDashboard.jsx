@@ -107,21 +107,21 @@ const ArtisanDashboard = () => {
             <div className="p-16 text-center">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 bg-indigo-50 rounded-[2rem] flex items-center justify-center text-indigo-600 mb-6 shadow-sm">
+                  <div className="w-20 h-20 bg-indigo-50 rounded-4xl flex items-center justify-center text-indigo-600 mb-6 shadow-sm">
                     <Palette size={32} />
                   </div>
                   <h3 className="font-black text-gray-900 mb-2">Showcase Art</h3>
                   <p className="text-sm text-gray-500 font-medium">Curate your own digital gallery with ease.</p>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 bg-violet-50 rounded-[2rem] flex items-center justify-center text-violet-600 mb-6 shadow-sm">
+                  <div className="w-20 h-20 bg-violet-50 rounded-4xl flex items-center justify-center text-violet-600 mb-6 shadow-sm">
                     <DollarSign size={32} />
                   </div>
                   <h3 className="font-black text-gray-900 mb-2">Earn Royalties</h3>
                   <p className="text-sm text-gray-500 font-medium">Get paid directly for your artistic talent.</p>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 bg-emerald-50 rounded-[2rem] flex items-center justify-center text-emerald-600 mb-6 shadow-sm">
+                  <div className="w-20 h-20 bg-emerald-50 rounded-4xl flex items-center justify-center text-emerald-600 mb-6 shadow-sm">
                     <Globe size={32} />
                   </div>
                   <h3 className="font-black text-gray-900 mb-2">Reach Millions</h3>
@@ -257,7 +257,7 @@ const ArtisanDashboard = () => {
 
           {/* My Artworks List */}
           <div className="lg:col-span-8">
-            <div className="card-premium p-8 min-h-[600px]">
+            <div className="card-premium p-8 min-h-150">
               <div className="flex items-center justify-between mb-10">
                 <h2 className="text-2xl font-black flex items-center gap-3 text-[#111827]">
                   <div className="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center text-violet-600">
@@ -276,7 +276,7 @@ const ArtisanDashboard = () => {
                   <p className="text-gray-500 font-medium">Refining your collection...</p>
                 </div>
               ) : myArtworks?.length === 0 || !myArtworks ? (
-                <div className="text-center py-32 bg-gray-50/50 rounded-[2rem] border-2 border-dashed border-gray-100">
+                <div className="text-center py-32 bg-gray-50/50 rounded-4xl border-2 border-dashed border-gray-100">
                   <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-gray-300 shadow-sm">
                     <Palette size={32} />
                   </div>

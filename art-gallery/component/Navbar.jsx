@@ -75,15 +75,15 @@ const Navbar = ({ onNavigate }) => {
             {isAuthenticated ? (
               <>
                 <button
-                  className="hidden md:block text-white/80 hover:text-white font-semibold 
-                             text-[0.95rem] transition-colors py-2 px-4 rounded-xl hover:bg-white/10"
+                  className="hidden md:block text-indigo-700 font-semibold 
+                             text-[0.95rem] py-2 px-4 rounded-xl"
                   onClick={() => onNavigate('artisan-dashboard')}
                 >
                   {user?.role === 'ARTISAN' ? 'Dashboard' : 'Sell Art'}
                 </button>
                 <button
-                  className="hidden md:block text-white/80 hover:text-white font-semibold 
-                             text-[0.95rem] transition-colors py-2 px-4 rounded-xl hover:bg-white/10"
+                  className="hidden md:block text-indigo-700 font-semibold 
+                             text-[0.95rem] py-2 px-4 rounded-xl"
                   onClick={() => onNavigate('my-orders')}
                 >
                   Orders
