@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-console.log('API URL:', import.meta.env.VITE_API_URL);
 export const publicArtworksApi = createApi({
     reducerPath: "publicArtworksApi",
     baseQuery: fetchBaseQuery({

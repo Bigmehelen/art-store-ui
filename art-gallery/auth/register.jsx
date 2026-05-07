@@ -111,7 +111,7 @@ const Register = ({ onNavigateToGallery }) => {
                 name="username"
                 value={formData.username}
                 onChange={handleInputChange}
-                placeholder="Unique handle"
+                placeholder="username"
                 disabled={isLoading}
                 className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-indigo-500 focus:shadow-xl transition-all outline-none font-medium"
               />

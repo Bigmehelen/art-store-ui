@@ -52,7 +52,7 @@ const Gallery = ({ onNavigateToRegister }) => {
       {/* Hero Section */}
       <section className="relative py-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-black text-[#111827] mb-8 leading-tight tracking-tight">
+          <h1 className="text-3xl md:text-5xl font-black text-[#111827] mb-8 leading-tight tracking-tight">
             Elevate Your Space with <br />
             <span className="text-transparent bg-clip-text bg-linear-to-br from-indigo-600 to-violet-600">
               Timeless Art
@@ -133,7 +133,7 @@ const Gallery = ({ onNavigateToRegister }) => {
             {filteredArtworks.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-32 text-center card-premium p-12">
                 <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-8">
-                  <Image size={40} className="text-gray-300" />
+                  <Image size={30} className="text-gray-300" />
                 </div>
                 <h3 className="text-2xl font-black text-gray-900 mb-3">No Results Found</h3>
                 <p className="text-gray-500 max-w-sm mb-8">
@@ -147,12 +147,12 @@ const Gallery = ({ onNavigateToRegister }) => {
                 </button>
               </div>
             ) : (
-              /* Artwork Grid */
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {filteredArtworks.map(artwork => (
                   <div key={artwork.id} className="group card-premium overflow-hidden flex flex-col h-full">
 
-                    {/* Image — subtle zoom only */}
+
                     <div className="relative overflow-hidden aspect-4/5">
                       <img
                         src={getImageUrl(artwork.imageUrls)}
@@ -165,7 +165,7 @@ const Gallery = ({ onNavigateToRegister }) => {
                       </div>
                     </div>
 
-                    {/* Info */}
+
                     <div className="p-6 flex flex-col flex-1">
                       <div className="flex justify-between items-start mb-3">
                         <div>

@@ -9,7 +9,7 @@ const Navbar = ({ onNavigate }) => {
   const { items } = useSelector(state => state.cart);
   const cartItemCount = items.reduce((total, item) => total + (item.quantity || 1), 0);
   const [scrolled, setScrolled] = useState(false);
-  
+
     useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -26,9 +26,9 @@ const Navbar = ({ onNavigate }) => {
   return (
     <div className="fixed top-0 left-0 right-0 z-100 px-6 pt-6 pb-2 
                     bg-linear-to-br from-black/10 to-transparent pointer-events-none">
-      <nav className="max-w-7xl mx-auto bg-linear-to-br from-indigo-600 to-violet-600 
-                      rounded-2xl px-6 py-3 flex justify-between items-center 
-                      shadow-[0_15px_35px_rgba(79,70,229,0.25)] pointer-events-auto">
+      <nav className="max-w-7xl mx-auto bg-linear-to-br bg-white/10 backdrop-blur-xl border border-white/10
+      rounded-2xl px-6 py-3 flex justify-between items-center shadow-[0_15px_35px_rgba(79,70,229,0.25)] pointer-events-auto"
+      >
         
         <div
           onClick={() => onNavigate('gallery')}
@@ -38,7 +38,7 @@ const Navbar = ({ onNavigate }) => {
                           text-indigo-600 transition-transform group-hover:rotate-12 shadow-lg">
             <Palette size={20} />
           </div>
-          <h1 className="text-[1.2rem] font-bold text-white tracking-tight">
+          <h1 className="text-[1.2rem] font-bold text-indigo-600 tracking-tight">
             Helen Art
           </h1>
         </div>
@@ -46,7 +46,7 @@ const Navbar = ({ onNavigate }) => {
 
         <div className="flex items-center gap-2 md:gap-6">
           <button
-            className="text-white/80 hover:text-white font-semibold text-[0.95rem] 
+            className=" text-indigo-600 hover:text-white font-semibold text-[0.95rem] 
                        transition-colors py-2 px-4 rounded-xl hover:bg-white/10"
             onClick={() => onNavigate('gallery')}
           >
@@ -57,7 +57,7 @@ const Navbar = ({ onNavigate }) => {
 
 
           <button
-            className="relative p-2.5 text-white/80 hover:text-white transition-all 
+            className="relative p-2.5 text-indigo-600 hover:text-white transition-all 
                        hover:bg-white/10 rounded-xl flex items-center gap-2 group"
             onClick={() => onNavigate('cart')}
           >
