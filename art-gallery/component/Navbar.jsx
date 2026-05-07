@@ -55,20 +55,19 @@ const Navbar = ({ onNavigate }) => {
 
           <div className="h-6 w-px bg-white/20 hidden md:block" />
 
-
           <button
             className="relative p-2.5 text-indigo-600 transition-all 
                        rounded-xl flex items-center gap-2 group"
             onClick={() => onNavigate('cart')}
           >
             <ShoppingCart size={22} className="group-hover:scale-110 transition-transform" />
-            {cartItemCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-white text-indigo-600 text-[10px] 
-                               font-bold min-w-45 h-45 flex items-center justify-center 
-                               rounded-full border-2 border-indigo-600 leading-none">
-                {cartItemCount}
-              </span>
-            )}
+           {cartItemCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[9px] 
+                            font-bold w-4 h-4 flex items-center justify-center 
+                            rounded-full leading-none aspect-square">
+              {cartItemCount}
+            </span>
+          )}
           </button>
 
 

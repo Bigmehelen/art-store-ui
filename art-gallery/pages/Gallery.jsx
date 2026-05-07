@@ -179,7 +179,7 @@ const Gallery = ({ onNavigateToRegister }) => {
                         </span>
                       </div>
 
-                      <p className="text-gray-900 text-sm leading-relaxed mb-6 line-clamp-2">
+                      <p className="text-gray-700 text-sm leading-relaxed mb-6 line-clamp-2">
                         {artwork.description}
                       </p>
 
