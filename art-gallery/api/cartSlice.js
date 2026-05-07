@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
 
 const initialState = {
-  items: [],
-  totalPrice: 0
+  items: JSON.parse(localStorage.getItem('cart')) || [],
+  totalAmount: 0,
+};
+
+const calculateTotal = (items) => {
+  return items.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
 };
 
 const cartSlice = createSlice({
@@ -11,56 +14,36 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const artwork = action.payload;
-      const existingItem = state.items.find(item => item.id === artwork.id);
-
+      const existingItem = state.items.find(item => item.id === action.payload.id);
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
       } else {
-        state.items.push({ ...artwork, quantity: 1 });
+        state.items.push({ ...action.payload, quantity: 1 });
       }
-
-      state.totalPrice = state.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+      state.totalAmount = calculateTotal(state.items);
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
-
     removeFromCart: (state, action) => {
-      const artworkId = action.payload;
-      state.items = state.items.filter(item => item.id !== artworkId);
-      state.totalPrice = state.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+      state.items = state.items.filter(item => item.id !== action.payload);
+      state.totalAmount = calculateTotal(state.items);
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
-
     updateQuantity: (state, action) => {
       const { id, quantity } = action.payload;
       const item = state.items.find(item => item.id === id);
-      if (item) {
+      if (item && quantity > 0) {
         item.quantity = quantity;
-        if (item.quantity <= 0) {
-          state.items = state.items.filter(item => item.id !== id);
-        }
       }
-      state.totalPrice = state.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+      state.totalAmount = calculateTotal(state.items);
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
-
     clearCart: (state) => {
       state.items = [];
-      state.totalPrice = 0;
+      state.totalAmount = 0;
+      localStorage.removeItem('cart');
     }
   }
 });
 
 export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
-
-export const useCart = () => {
-  const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart);
-
-  return {
-    ...cart,
-    addToCart: (artwork) => dispatch(addToCart(artwork)),
-    removeFromCart: (artworkId) => dispatch(removeFromCart(artworkId)),
-    updateQuantity: (id, quantity) => dispatch(updateQuantity({ id, quantity })),
-    clearCart: () => dispatch(clearCart())
-  };
-};
-
 export default cartSlice.reducer;

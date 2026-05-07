@@ -1,9 +1,13 @@
 import React from 'react';
 import { useAuth } from '../api/authAPI';
+import { useSelector } from 'react-redux';
+import { ShoppingCart } from 'lucide-react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Navbar = ({ onNavigate }) => {
   const { user, isAuthenticated, logout } = useAuth();
+  const { items } = useSelector(state => state.cart);
+  const cartItemCount = items.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const handleLogout = () => {
     logout();
@@ -31,16 +35,43 @@ const Navbar = ({ onNavigate }) => {
             Gallery
           </button>
 
-          <div className="flex flex-wrap gap-3.75 items-center w-full md:w-auto justify-center md:justify-start">
+          <button
+            className="relative bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea] flex items-center gap-1.5"
+            onClick={() => onNavigate('cart')}
+          >
+            <ShoppingCart size={20} />
+            <span>Cart</span>
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-3 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-white">
+                {cartItemCount}
+              </span>
+            )}
+          </button>
+
+          <div className="flex flex-wrap gap-3.75 items-center w-full md:w-auto justify-center md:justify-start ml-2">
             {isAuthenticated ? (
               <>
-                <span className="text-[0.95rem] text-[#ecf0f1] block text-center w-full md:w-auto">Welcome, {user?.username}!</span>
                 <button
-                  className="px-4 py-2 rounded-md border-2 border-white bg-white/20 text-white text-[0.95rem] font-semibold cursor-pointer transition-all duration-300 hover:bg-white/30"
-                  onClick={handleLogout}
+                  className="bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea]"
+                  onClick={() => onNavigate('artisan-dashboard')}
                 >
-                  Logout
+                  {user?.role === 'ARTISAN' ? 'Artisan Dashboard' : 'Become Artisan'}
                 </button>
+                <button
+                  className="bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea]"
+                  onClick={() => onNavigate('my-orders')}
+                >
+                  My Orders
+                </button>
+                <div className="flex items-center gap-3 ml-2">
+                  <span className="text-[0.9rem] text-gray-300 hidden md:inline">Hi, {user?.username}</span>
+                  <button
+                    className="px-4 py-1.5 rounded-md border border-white/30 bg-white/10 text-white text-[0.9rem] font-semibold cursor-pointer transition-all duration-300 hover:bg-white/20"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
               </>
             ) : (
               <>

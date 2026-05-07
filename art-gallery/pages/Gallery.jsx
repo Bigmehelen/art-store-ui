@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { useAuth } from '../api/authAPI';
 import { useGetAllArtworksQuery } from '../api/publicArtworksAPI';
 import { usePlaceOrderMutation } from '../api/artworksAPI';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../api/cartSlice';
+import { Image, X } from 'lucide-react';
 
 const Gallery = ({ onNavigateToRegister }) => {
   const { isAuthenticated, user } = useAuth();
+  const dispatch = useDispatch();
   const { data, isLoading } = useGetAllArtworksQuery();
   const artworks = Array.isArray(data) ? data : (data?.data || []);
   const [placeOrderMutation] = usePlaceOrderMutation();
@@ -35,26 +39,13 @@ const Gallery = ({ onNavigateToRegister }) => {
   const [showOrderModal, setShowOrderModal] = useState(false);
   const [selectedArtwork, setSelectedArtwork] = useState(null);
   const [filter, setFilter] = useState('all');
-  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [cartSuccess, setCartSuccess] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleOrderClick = (artwork) => {
-    setSelectedArtwork(artwork);
-    if (!isAuthenticated) {
-      setShowOrderModal(true);
-    } else {
-      handlePlaceOrder(artwork);
-    }
-  };
-
-  const handlePlaceOrder = async(artwork) => {
-    try {
-      await placeOrderMutation({ artworkId: artwork.id, user }).unwrap();
-      setOrderSuccess(true);
-      setTimeout(() => setOrderSuccess(false), 1000);
-    } catch {
-      alert('Failed to place order. Please try again.');
-    }
+  const handleAddToCart = (artwork) => {
+    dispatch(addToCart(artwork));
+    setCartSuccess(artwork.id);
+    setTimeout(() => setCartSuccess(null), 2000);
   };
 
   const getUniqueCategories = () => {
@@ -88,15 +79,13 @@ const Gallery = ({ onNavigateToRegister }) => {
             placeholder="Search artwork by name..."
             className="flex-1 px-5 py-3 text-[15px] text-[#111827] outline-none bg-transparent placeholder:text-[#9ca3af]"
           />
-          {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="px-4 text-[#6b7280] hover:text-[#111827] transition-colors text-lg"
+              className="px-4 text-[#6b7280] hover:text-[#111827] transition-colors"
               aria-label="Clear search"
             >
-              ✕
+              <X size={20} />
             </button>
-          )}
           <button className="bg-[#111827] text-white px-6 py-3 text-[14px] font-semibold hover:bg-black transition-colors">
             Search
           </button>
@@ -141,7 +130,7 @@ const Gallery = ({ onNavigateToRegister }) => {
 
           {filteredArtworks.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center px-4">
-              <span className="text-5xl mb-4">🎨</span>
+              <Image size={64} className="text-gray-300 mb-6" />
               <p className="text-[18px] font-semibold text-[#374151] mb-2">No artworks found</p>
               <p className="text-[14px] text-[#6b7280]">
                 {searchQuery.trim() !== '' 
@@ -166,14 +155,14 @@ const Gallery = ({ onNavigateToRegister }) => {
                     <p className="text-[16px] font-bold mb-3">N{artwork.price.toLocaleString()}</p>
 
                     <button
-                      className={`w-full py-2.5 rounded-lg flex items-center justify-center font-semibold text-[14px] transition-colors duration-200 ${orderSuccess && selectedArtwork?.id === artwork.id
+                      className={`w-full py-2.5 rounded-lg flex items-center justify-center font-semibold text-[14px] transition-colors duration-200 ${cartSuccess === artwork.id
                           ? 'bg-[#10b981] text-white'
                           : 'bg-[#111827] text-white hover:bg-black'
                         }`}
-                      onClick={() => handleOrderClick(artwork)}
-                      disabled={orderSuccess && selectedArtwork?.id === artwork.id}
+                      onClick={() => handleAddToCart(artwork)}
+                      disabled={cartSuccess === artwork.id}
                     >
-                      {orderSuccess && selectedArtwork?.id === artwork.id ? '✓ Ordered!' : 'Order Now'}
+                      {cartSuccess === artwork.id ? '✓ Added to Cart' : 'Add to Cart'}
                     </button>
                   </div>
                 </div>
@@ -181,32 +170,6 @@ const Gallery = ({ onNavigateToRegister }) => {
             </div>
           )}
         </>
-      )}
-
-
-      {showOrderModal && !isAuthenticated && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-1000">
-          <div className="bg-white rounded-2xl p-6 w-full md:w-[60%] max-w-125">
-            <h2 className="text-[22px] font-bold mb-3 text-center">Sign Up to Order</h2>
-            <p className="text-[14px] text-center mb-5 text-[#374151]">
-              You need to create an account before placing your first order.
-            </p>
-            <div className="flex flex-col md:flex-row gap-3">
-              <button
-                className="flex-1 bg-[#111827] text-white py-3 rounded-lg flex items-center justify-center font-semibold hover:bg-black transition-colors"
-                onClick={onNavigateToRegister}
-              >
-                Create Account
-              </button>
-              <button
-                className="flex-1 bg-[#e5e7eb] text-[#111827] py-3 rounded-lg flex items-center justify-center font-semibold hover:bg-gray-300 transition-colors"
-                onClick={() => setShowOrderModal(false)}
-              >
-                Continue Shopping
-              </button>
-            </div>
-          </div>
-        </div>
       )}
     </div>
   );

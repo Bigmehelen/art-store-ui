@@ -24,10 +24,28 @@ export const artworksApi = createApi({
         },
       }),
     }),
+    createArtwork: builder.mutation({
+      query: (artworkData) => ({
+        url: "/api/v1/artworks",
+        method: "POST",
+        body: artworkData,
+      }),
+    }),
+    getMyArtworks: builder.query({
+      query: () => "/api/v1/artworks/my-artworks",
+    }),
+    getMyOrders: builder.query({
+      query: () => "/api/orders/my-orders",
+    }),
   }),
 });
 
-export const { usePlaceOrderMutation } = artworksApi;
+export const { 
+  usePlaceOrderMutation, 
+  useCreateArtworkMutation, 
+  useGetMyArtworksQuery,
+  useGetMyOrdersQuery 
+} = artworksApi;
 
 export const usePlaceOrder = () => {
   const [placeOrderMutation, { isLoading }] = usePlaceOrderMutation();
