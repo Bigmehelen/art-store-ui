@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../api/authAPI';
 import { useSelector } from 'react-redux';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Palette } from 'lucide-react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Navbar = ({ onNavigate }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const { items } = useSelector(state => state.cart);
   const cartItemCount = items.reduce((total, item) => total + (item.quantity || 1), 0);
+  const [scrolled, setScrolled] = useState(false);
+  
+    useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+ 
 
   const handleLogout = () => {
     logout();
@@ -16,78 +24,92 @@ const Navbar = ({ onNavigate }) => {
   };
 
   return (
-    <nav className="bg-linear-to-br from-[#2c3e50] to-[#3d4e60] text-white p-0 shadow-lg sticky top-0 z-100">
-      <div className="max-w-350 mx-auto px-5 py-3.75 flex flex-col md:flex-row justify-between items-center gap-3.75 md:gap-0">
-        <div className="navbar-brand">
-          <h1
-            onClick={() => onNavigate('gallery')}
-            className="m-0 text-[1.4rem] md:text-[1.8rem] cursor-pointer transition-all duration-300 text-white hover:scale-105 hover:text-[#667eea]"
-          >
-            Art Gallery
+    <div className="fixed top-0 left-0 right-0 z-100 px-6 pt-6 pb-2 
+                    bg-linear-to-br from-black/10 to-transparent pointer-events-none">
+      <nav className="max-w-7xl mx-auto bg-linear-to-br from-indigo-600 to-violet-600 
+                      rounded-2xl px-6 py-3 flex justify-between items-center 
+                      shadow-[0_15px_35px_rgba(79,70,229,0.25)] pointer-events-auto">
+        
+        <div
+          onClick={() => onNavigate('gallery')}
+          className="flex items-center gap-2 cursor-pointer group"
+        >
+          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center 
+                          text-indigo-600 transition-transform group-hover:rotate-12 shadow-lg">
+            <Palette size={20} />
+          </div>
+          <h1 className="text-[1.2rem] font-bold text-white tracking-tight">
+            Helen Art
           </h1>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-3.75 md:gap-3.75 items-center w-full md:w-auto">
+
+        <div className="flex items-center gap-2 md:gap-6">
           <button
-            className="bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea]"
+            className="text-white/80 hover:text-white font-semibold text-[0.95rem] 
+                       transition-colors py-2 px-4 rounded-xl hover:bg-white/10"
             onClick={() => onNavigate('gallery')}
           >
             Gallery
           </button>
 
+          <div className="h-6 w-px bg-white/20 hidden md:block" />
+
+
           <button
-            className="relative bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea] flex items-center gap-1.5"
+            className="relative p-2.5 text-white/80 hover:text-white transition-all 
+                       hover:bg-white/10 rounded-xl flex items-center gap-2 group"
             onClick={() => onNavigate('cart')}
           >
-            <ShoppingCart size={20} />
-            <span>Cart</span>
+            <ShoppingCart size={22} className="group-hover:scale-110 transition-transform" />
             {cartItemCount > 0 && (
-              <span className="absolute -top-1 -right-3 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-white">
+              <span className="absolute -top-1 -right-1 bg-white text-indigo-600 text-[10px] 
+                               font-bold min-w-45 h-45 flex items-center justify-center 
+                               rounded-full border-2 border-indigo-600 leading-none">
                 {cartItemCount}
               </span>
             )}
           </button>
 
-          <div className="flex flex-wrap gap-3.75 items-center w-full md:w-auto justify-center md:justify-start ml-2">
+
+          <div className="flex items-center gap-3">
             {isAuthenticated ? (
               <>
                 <button
-                  className="bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea]"
+                  className="hidden md:block text-white/80 hover:text-white font-semibold 
+                             text-[0.95rem] transition-colors py-2 px-4 rounded-xl hover:bg-white/10"
                   onClick={() => onNavigate('artisan-dashboard')}
                 >
-                  {user?.role === 'ARTISAN' ? 'Artisan Dashboard' : 'Become Artisan'}
+                  {user?.role === 'ARTISAN' ? 'Dashboard' : 'Sell Art'}
                 </button>
                 <button
-                  className="bg-none border-none text-white text-base cursor-pointer transition-all duration-300 py-2 border-b-2 border-transparent hover:text-[#667eea] hover:border-[#667eea]"
+                  className="hidden md:block text-white/80 hover:text-white font-semibold 
+                             text-[0.95rem] transition-colors py-2 px-4 rounded-xl hover:bg-white/10"
                   onClick={() => onNavigate('my-orders')}
                 >
-                  My Orders
+                  Orders
                 </button>
-                <div className="flex items-center gap-3 ml-2">
-                  <span className="text-[0.9rem] text-gray-300 hidden md:inline">Hi, {user?.username}</span>
-                  <button
-                    className="px-4 py-1.5 rounded-md border border-white/30 bg-white/10 text-white text-[0.9rem] font-semibold cursor-pointer transition-all duration-300 hover:bg-white/20"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
+                <button
+                  className="bg-white text-indigo-600 px-5 py-2.5 rounded-xl font-bold 
+                             text-[0.9rem] hover:bg-gray-50 transition-all shadow-md active:scale-95"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
               </>
             ) : (
-              <>
-                <button
-                  className="px-4 py-2 rounded-md border-none bg-linear-to-br from-[#667eea] to-[#764ba2] text-white text-[0.95rem] font-semibold cursor-pointer transition-all duration-300 hover:translate-y-0.5 hover:shadow-[0_4px_12px_rgba(102,126,234,0.4)]"
-                  onClick={() => onNavigate('login')}
-                >
-                  Login
-                </button>
-               
-              </>
+              <button
+                className="bg-white text-indigo-600 px-6 py-2.5 rounded-xl font-bold 
+                           text-[0.95rem] hover:bg-gray-50 transition-all shadow-md active:scale-95"
+                onClick={() => onNavigate('login')}
+              >
+                Login
+              </button>
             )}
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 

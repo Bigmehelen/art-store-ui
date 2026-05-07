@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Palette, Plus } from 'lucide-react';
 import { useLoginMutation } from '../api/authAPI';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../api/authSlice';
@@ -64,74 +65,95 @@ const Login = ({ onNavigateToGallery, onNavigateToRegister }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-5 bg-linear-to-br from-[#667eea] to-[#764ba2]">
-      <div className="bg-white rounded-2xl p-5 py-7.5 md:p-10 w-full max-w-112.5 shadow-2xl">
-        <h1 className="m-0 mb-2.5 text-[#2c3e50] text-[1.5rem] md:text-[2rem] text-center font-bold">Welcome Back</h1>
-        <p className="text-center text-[#7f8c8d] m-0 mb-7.5 text-[1.05rem]">Login to continue shopping</p>
+    <div className="min-h-screen flex items-center justify-center p-6 bg-[#F9FAFB] relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-50 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
-        {localError && <div className="bg-[#fee] text-[#c33] p-3 rounded-lg mb-5 border-l-4 border-[#c33]">{localError}</div>}
-        {success && <div className="bg-[#efe] text-[#3c3] p-3 rounded-lg mb-5 border-l-4 border-[#3c3]">{success}</div>}
+      <div className="card-premium p-10 md:p-16 w-full max-w-lg relative z-10">
+        <div className="text-center mb-12">
+          <div className="w-16 h-16 bg-[#111827] rounded-2xl flex items-center justify-center text-white mx-auto mb-6 shadow-xl rotate-3">
+            <Palette size={32} />
+          </div>
+          <h1 className="text-4xl font-black text-[#111827] mb-3 tracking-tight">Welcome Back</h1>
+          <p className="text-gray-500 font-medium text-lg">Continue your artistic journey</p>
+        </div>
 
-        <form onSubmit={handleLogin} className="flex flex-col gap-4 md:gap-5 mb-5">
-          <div className="flex flex-col">
-            <label htmlFor="username" className="mb-2 text-[#2c3e50] font-semibold text-[0.95rem]">Username</label>
+        {localError && (
+          <div className="bg-red-50 text-red-700 p-4 rounded-2xl mb-8 border border-red-100 text-sm font-bold animate-in fade-in slide-in-from-top-2">
+            {localError}
+          </div>
+        )}
+        {success && (
+          <div className="bg-emerald-50 text-emerald-700 p-4 rounded-2xl mb-8 border border-emerald-100 text-sm font-bold animate-in fade-in slide-in-from-top-2">
+            {success}
+          </div>
+        )}
+
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div className="space-y-2">
+            <label htmlFor="username" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Username</label>
             <input
-              type="username"
+              type="text"
               id="username"
               name="username"
               value={formData.username}
               onChange={handleInputChange}
-              placeholder="Enter your username"
+              placeholder="Your gallery handle"
               disabled={isLoading}
-              className="p-3 border-2 border-[#ecf0f1] rounded-lg text-base transition-all duration-300 focus:outline-none focus:border-[#667eea] focus:shadow-[0_0_0_3px_rgba(102,126,234,0.1)] disabled:bg-[#f8f9fa] disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-indigo-500 focus:shadow-xl transition-all outline-none font-medium"
             />
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="password" className="mb-2 text-[#2c3e50] font-semibold text-[0.95rem]">Password</label>
+          <div className="space-y-2">
+            <label htmlFor="password" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Password</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              placeholder="Enter your password"
+              placeholder="••••••••"
               disabled={isLoading}
-              className="p-3 border-2 border-[#ecf0f1] rounded-lg text-base transition-all duration-300 focus:outline-none focus:border-[#667eea] focus:shadow-[0_0_0_3px_rgba(102,126,234,0.1)] disabled:bg-[#f8f9fa] disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-indigo-500 focus:shadow-xl transition-all outline-none font-medium"
             />
           </div>
 
           <button
             type="submit"
-            className="p-3.5 bg-linear-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg text-[1.05rem] font-semibold cursor-pointer transition-all duration-300 hover:enabled:translate-y-0.5 hover:enabled:shadow-[0_4px_15px_rgba(102,126,234,0.4)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full py-5 bg-[#111827] text-white rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl hover:shadow-2xl disabled:opacity-50 active:scale-95 flex items-center justify-center gap-3 mt-4"
             disabled={isLoading}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? (
+              <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+            ) : (
+              <>Sign In <Plus size={20} /></>
+            )}
           </button>
         </form>
 
-        <div className="text-center mb-4">
-          <p className="text-[#2c3e50]">Don't have an account?
-            <button
-              className="bg-transparent border-none text-[#667eea] font-semibold cursor-pointer ml-1 hover:underline"
-              onClick={onNavigateToRegister}
-              disabled={isLoading}
-            >
-              Sign up here
-            </button>
-          </p>
+        <div className="mt-12 text-center pt-8 border-t border-gray-50">
+          <p className="text-gray-500 font-medium mb-4">New to the gallery?</p>
+          <button
+            className="text-indigo-600 font-black hover:text-indigo-700 transition-colors"
+            onClick={onNavigateToRegister}
+            disabled={isLoading}
+          >
+            Create an Account
+          </button>
         </div>
 
         <button
-          className="w-full p-3 bg-[#f8f9fa] text-[#667eea] border-2 border-[#667eea] rounded-lg text-base font-semibold cursor-pointer transition-all duration-300 hover:enabled:bg-[#667eea] hover:enabled:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full mt-6 py-4 text-gray-400 hover:text-gray-900 font-bold transition-colors text-sm uppercase tracking-widest"
           onClick={onNavigateToGallery}
           disabled={isLoading}
         >
-          Back to Gallery
+          Explore Without Account
         </button>
       </div>
     </div>
   );
 };
+
 
 export default Login;
