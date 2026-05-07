@@ -153,7 +153,7 @@ const Gallery = ({ onNavigateToRegister }) => {
                   <div key={artwork.id} className="group card-premium overflow-hidden flex flex-col h-full">
 
 
-                    <div className="relative overflow-hidden aspect-4/5">
+                    <div className="relative overflow-hidden aspect-square">
                       <img
                         src={getImageUrl(artwork.imageUrls)}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
@@ -172,14 +172,14 @@ const Gallery = ({ onNavigateToRegister }) => {
                           <h3 className="text-lg font-black text-gray-900 mb-0.5">
                             {artwork.name}
                           </h3>
-                          <p className="text-gray-400 text-sm font-medium">by {artwork.artist}</p>
+                          <p className="text-gray-700 text-sm font-medium">by {artwork.artist}</p>
                         </div>
                         <span className="text-lg font-black text-indigo-600 whitespace-nowrap ml-4">
                           ₦{artwork.price.toLocaleString()}
                         </span>
                       </div>
 
-                      <p className="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">
+                      <p className="text-gray-900 text-sm leading-relaxed mb-6 line-clamp-2">
                         {artwork.description}
                       </p>
 

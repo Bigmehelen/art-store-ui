@@ -46,8 +46,8 @@ const Navbar = ({ onNavigate }) => {
 
         <div className="flex items-center gap-2 md:gap-6">
           <button
-            className=" text-indigo-600 hover:text-white font-semibold text-[0.95rem] 
-                       transition-colors py-2 px-4 rounded-xl hover:bg-white/10"
+            className=" text-indigo-600 font-semibold text-[0.95rem] 
+                       transition-colors py-2 px-4 rounded-xl "
             onClick={() => onNavigate('gallery')}
           >
             Gallery
@@ -57,8 +57,8 @@ const Navbar = ({ onNavigate }) => {
 
 
           <button
-            className="relative p-2.5 text-indigo-600 hover:text-white transition-all 
-                       hover:bg-white/10 rounded-xl flex items-center gap-2 group"
+            className="relative p-2.5 text-indigo-600 transition-all 
+                       rounded-xl flex items-center gap-2 group"
             onClick={() => onNavigate('cart')}
           >
             <ShoppingCart size={22} className="group-hover:scale-110 transition-transform" />
