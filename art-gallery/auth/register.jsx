@@ -4,7 +4,7 @@ import { useRegisterMutation } from '../api/authAPI';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../api/authSlice';
 
-const Register = ({ onNavigateToGallery }) => {
+const Register = ({ onNavigateToGallery, onNavigateToLogin }) => {
   const [registerMutation, { isLoading }] = useRegisterMutation();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -177,7 +177,7 @@ const Register = ({ onNavigateToGallery }) => {
           <p className="text-gray-500 font-medium mb-4">Already have an account?</p>
           <button
             className="text-indigo-600 font-black hover:text-indigo-700 transition-colors"
-            onClick={() => window.location.href = '/login'}
+            onClick={onNavigateToLogin}
             disabled={isLoading}
           >
             Sign In Instead

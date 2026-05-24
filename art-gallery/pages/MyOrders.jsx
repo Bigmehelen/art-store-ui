@@ -3,7 +3,7 @@ import { useAuth } from '../api/authAPI';
 import { useGetMyOrdersQuery } from '../api/artworksAPI';
 import { ShoppingBag } from 'lucide-react';
 
-const MyOrders = () => {
+const MyOrders = ({ onNavigateToGallery }) => {
   const { isAuthenticated, user } = useAuth();
   const { data: orders, isLoading, error } = useGetMyOrdersQuery(undefined, {
     skip: !isAuthenticated
@@ -48,7 +48,7 @@ const MyOrders = () => {
             <p className="text-gray-500 mb-10 text-lg">Your personal gallery is waiting for its first masterpiece.</p>
             <button 
               className="bg-[#111827] text-white px-10 py-4 rounded-2xl font-black shadow-xl hover:bg-black transition-all active:scale-95"
-              onClick={() => window.location.href = '/'}
+              onClick={onNavigateToGallery}
             >
               Discover Art
             </button>

@@ -3,7 +3,7 @@ import { useAuth, useBecomeArtistMutation } from '../api/authAPI';
 import { useCreateArtworkMutation, useGetMyArtworksQuery } from '../api/artworksAPI';
 import { Palette, DollarSign, Globe, Upload, Layout } from 'lucide-react';
 
-const ArtisanDashboard = () => {
+const ArtisanDashboard = ({ onNavigateToLogin }) => {
   const { user, isAuthenticated } = useAuth();
   const [becomeArtist] = useBecomeArtistMutation();
   const [createArtwork, { isLoading: isUploading }] = useCreateArtworkMutation();
@@ -82,7 +82,7 @@ const ArtisanDashboard = () => {
           <h2 className="text-3xl font-black mb-4 text-gray-900">Access Denied</h2>
           <p className="text-gray-500 mb-8 text-lg">Please sign in to your gallery account to access the creator portal.</p>
           <button 
-            onClick={() => window.location.href = '/login'}
+            onClick={onNavigateToLogin}
             className="w-full py-4 bg-[#111827] text-white rounded-2xl font-black shadow-xl hover:bg-black transition-all"
           >
             Go to Login

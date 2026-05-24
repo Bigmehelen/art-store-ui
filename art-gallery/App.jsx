@@ -16,10 +16,24 @@ function App() {
       <Navbar onNavigate={setCurrentPage} />
       <main className="app-main flex-1">
         {currentPage === 'gallery' && <Gallery onNavigateToRegister={() => setCurrentPage('register')} />}
-        {currentPage === 'register' && <Register onNavigateToGallery={() => setCurrentPage('gallery')} />}
-        {currentPage === 'login' && <Login onNavigateToGallery={() => setCurrentPage('gallery')} onNavigateToRegister={() => setCurrentPage('register')} />}
-        {currentPage === 'artisan-dashboard' && <ArtisanDashboard />}
-        {currentPage === 'my-orders' && <MyOrders />}
+        {currentPage === 'register' && (
+          <Register 
+            onNavigateToGallery={() => setCurrentPage('gallery')} 
+            onNavigateToLogin={() => setCurrentPage('login')} 
+          />
+        )}
+        {currentPage === 'login' && (
+          <Login 
+            onNavigateToGallery={() => setCurrentPage('gallery')} 
+            onNavigateToRegister={() => setCurrentPage('register')} 
+          />
+        )}
+        {currentPage === 'artisan-dashboard' && (
+          <ArtisanDashboard onNavigateToLogin={() => setCurrentPage('login')} />
+        )}
+        {currentPage === 'my-orders' && (
+          <MyOrders onNavigateToGallery={() => setCurrentPage('gallery')} />
+        )}
         {currentPage === 'cart' && (
           <Cart 
             onNavigateToLogin={() => setCurrentPage('login')} 
