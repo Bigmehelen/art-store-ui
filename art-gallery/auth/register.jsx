@@ -76,7 +76,7 @@ const Register = ({ onNavigateToGallery }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-[#F9FAFB] relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center pt-32 pb-16 px-6 bg-[#F9FAFB] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-50 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-50 rounded-full blur-3xl translate-y-1/2 translate-x-1/2"></div>
