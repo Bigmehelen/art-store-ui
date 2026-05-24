@@ -24,7 +24,7 @@ const Navbar = ({ onNavigate }) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-100 px-6 pt-6 pb-2 
+    <div className="fixed top-0 left-0 right-0 z-100 px-6 pt-10 pb-2 
                     bg-linear-to-br from-black/10 to-transparent pointer-events-none">
       <nav className="max-w-7xl mx-auto bg-linear-to-br bg-white/10 backdrop-blur-xl border border-white/10
       rounded-2xl px-6 py-3 flex justify-between items-center shadow-[0_15px_35px_rgba(79,70,229,0.25)] pointer-events-auto"
