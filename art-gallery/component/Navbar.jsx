@@ -32,7 +32,7 @@ const Navbar = ({ onNavigate }) => {
         
         <div
           onClick={() => onNavigate('gallery')}
-          className="flex items-center gap-2 cursor-pointer group"
+          className="hidden md:flex items-center gap-2 cursor-pointer group"
         >
           <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center 
                           text-indigo-600 transition-transform group-hover:rotate-12 shadow-lg">
@@ -43,8 +43,7 @@ const Navbar = ({ onNavigate }) => {
           </h1>
         </div>
 
-
-        <div className="flex items-center gap-2 md:gap-6">
+        <div className="flex items-center justify-between w-full md:w-auto md:justify-end gap-2 md:gap-6">
           <button
             className=" text-indigo-600 font-semibold text-[0.95rem] 
                        transition-colors py-2 px-4 rounded-xl "
@@ -53,22 +52,21 @@ const Navbar = ({ onNavigate }) => {
             Gallery
           </button>
 
-          <div className="h-6 w-px bg-white/20 hidden md:block" />
-
-          <button
-            className="relative p-2.5 text-indigo-600 transition-all 
-                       rounded-xl flex items-center gap-2 group"
-            onClick={() => onNavigate('cart')}
-          >
-            <ShoppingCart size={22} className="group-hover:scale-110 transition-transform" />
-           {cartItemCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[9px] 
-                            font-bold w-4 h-4 flex items-center justify-center 
-                            rounded-full leading-none aspect-square">
-              {cartItemCount}
-            </span>
-          )}
-          </button>
+          <div className="flex items-center gap-2 md:gap-6">
+            <button
+              className="relative p-2.5 text-indigo-600 transition-all 
+                         rounded-xl flex items-center gap-2 group"
+              onClick={() => onNavigate('cart')}
+            >
+              <ShoppingCart size={22} className="group-hover:scale-110 transition-transform" />
+             {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[9px] 
+                              font-bold w-4 h-4 flex items-center justify-center 
+                              rounded-full leading-none aspect-square">
+                {cartItemCount}
+              </span>
+            )}
+            </button>
 
 
           <div className="flex items-center gap-3">
@@ -107,7 +105,8 @@ const Navbar = ({ onNavigate }) => {
             )}
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
     </div>
   );
 };
