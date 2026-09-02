@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../api/authAPI';
 import { useSelector } from 'react-redux';
 import { ShoppingCart, Palette } from 'lucide-react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Navbar = ({ onNavigate }) => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -17,10 +16,9 @@ const Navbar = ({ onNavigate }) => {
   }, []);
  
 
-  const handleLogout = () => {
-    logout();
-    AsyncStorage.removeItem('user');
-    AsyncStorage.removeItem('token');
+  const handleLogout = async () => {
+    await logout();
+    onNavigate('gallery');
   };
 
   return (

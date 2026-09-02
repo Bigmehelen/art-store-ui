@@ -95,9 +95,10 @@ export const useAuth = () => {
     logout: async () => {
       try {
         await logoutMutation().unwrap();
-        dispatch(clearAuth());
       } catch (error) {
         dispatch(setError(error.data?.message || 'Logout failed'));
+      } finally {
+        dispatch(clearAuth());
       }
     },
     clearError: () => dispatch(clearError())
