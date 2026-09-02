@@ -92,15 +92,10 @@ export const useAuth = () => {
         throw error;
       }
     },
-    logout: async () => {
-      try {
-        await logoutMutation().unwrap();
-      } catch (error) {
-        dispatch(setError(error.data?.message || 'Logout failed'));
-      } finally {
-        dispatch(clearAuth());
-      }
-    },
+   logout: async () => {
+  await AsyncStorage.removeItem('token');
+  dispatch(clearAuth());
+},
     clearError: () => dispatch(clearError())
   };
 };
